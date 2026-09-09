@@ -162,9 +162,9 @@ def compute_summary(trades: pd.DataFrame, monthly: pd.DataFrame, cfg: Config,
 
 # ---------------------------------------------------------------- formatting
 
-def fmt(v) -> str:
+def fmt(v, header: str = "") -> str:
     if isinstance(v, (int, np.integer)):
-        return f"{int(v):,}"
+        return str(int(v)) if header == "Year" else f"{int(v):,}"
     if isinstance(v, float):
         if math.isinf(v):
             return "inf"
@@ -177,7 +177,7 @@ def fmt(v) -> str:
 def md_table(headers: list[str], rows: list[list]) -> str:
     out = ["| " + " | ".join(headers) + " |", "|" + "---|" * len(headers)]
     for r in rows:
-        out.append("| " + " | ".join(fmt(c) for c in r) + " |")
+        out.append("| " + " | ".join(fmt(c, h) for c, h in zip(r, headers)) + " |")
     return "\n".join(out)
 
 
