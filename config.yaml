@@ -1,0 +1,47 @@
+# Pre-registered parameters — spx-condor-sim stage 1
+# Frozen 2026-09-09. Do not edit after first results run; see docs/amendments.md.
+data:
+  index: "^GSPC"
+  start: "2004-01-01"
+  vix: "^VIX"
+  vix3m: "^VIX3M"
+  vix9d: "^VIX9D"
+  riskfree_fred: "DTB3"
+  dividend_yield: 0.015
+pricing:
+  model: black_scholes
+  put_skew_per_pct_otm: 0.8
+  call_skew_per_pct_otm: -0.3
+  bid_ask_per_leg_points: 0.10
+  commission_per_leg_contract_usd: 1.25
+  multiplier: 100
+entry:
+  dte_min: 30
+  dte_max: 45
+  expiry_type: monthly_third_friday
+  fill: close
+strikes:
+  put_sigma_mult: 2.0
+  call_sigma_mult: 1.5
+  sigma_source: max_of [realised_21d, realised_63d, vix_implied]
+  width_points: 100
+  width_pct_below_6000: 0.013
+  strike_grid: 5
+exit:
+  profit_take_fraction: 0.50
+  dte_exit: 21
+filter:
+  block_entry_when: "VIX > VIX3M"
+  close_open_positions: false
+sizing:
+  book_usd: 400000
+  variant_a_contracts: 2
+  variant_b_risk_fraction: 0.035
+cash:
+  earn_riskfree_on_idle: true
+acceptance:
+  sharpe_min: 0.4
+  sharpe_max: 1.2
+  put_breach_range: [0.02, 0.05]
+  call_breach_range: [0.04, 0.09]
+  lag_sensitivity_max: 0.10
