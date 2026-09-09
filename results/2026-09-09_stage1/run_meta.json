@@ -1,0 +1,57 @@
+{
+  "run_id": "2026-09-09_stage1",
+  "timestamp": "2026-09-09T15:19:00",
+  "python": "3.14.3",
+  "pandas": "3.0.5",
+  "numpy": "2.5.3",
+  "data_start": "2004-01-02",
+  "data_end": "2026-09-09",
+  "acceptance": {
+    "A1": "FAIL",
+    "A2": "PASS",
+    "A3": "FAIL",
+    "A4": "FAIL",
+    "A5": "PASS"
+  },
+  "a2_status": "PASS",
+  "diagnostics": {
+    "A": {
+      "entries_blocked_by_filter_days": 150,
+      "expiries_skipped_filter": 31,
+      "entries_skipped_nonpositive_credit": 30,
+      "entries_skipped_zero_contracts": 0,
+      "expiry_settlements": 0,
+      "vol_floor_hits": 0,
+      "same_expiry_reentries": 31,
+      "first_vix3m_date": "2006-07-17",
+      "open_position_at_end": {
+        "entry_date": "2026-09-01",
+        "expiry": "2026-10-16",
+        "contracts": 2,
+        "credit_net": 10.065893669310901
+      },
+      "n_trades": 282,
+      "sim_start": "2005-01-03",
+      "sim_end": "2026-09-09"
+    },
+    "B": {
+      "entries_blocked_by_filter_days": 150,
+      "expiries_skipped_filter": 31,
+      "entries_skipped_nonpositive_credit": 30,
+      "entries_skipped_zero_contracts": 0,
+      "expiry_settlements": 0,
+      "vol_floor_hits": 0,
+      "same_expiry_reentries": 31,
+      "first_vix3m_date": "2006-07-17",
+      "open_position_at_end": {
+        "entry_date": "2026-09-01",
+        "expiry": "2026-10-16",
+        "contracts": 2,
+        "credit_net": 10.065893669310901
+      },
+      "n_trades": 282,
+      "sim_start": "2005-01-03",
+      "sim_end": "2026-09-09"
+    }
+  }
+}
