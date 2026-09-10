@@ -2,3 +2,5 @@
 __pycache__/
 *.pyc
 data/cache/
+data/quotes/raw
+data/quotes/eod
