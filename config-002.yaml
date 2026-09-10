@@ -1,0 +1,31 @@
+# config-002.yaml — amendment 002 (docs/amendments.md, 2026-09-10): acceptance tests A1, A3, A4.
+# This file contains ONLY the acceptance: section. It is applied as an overlay on config.yaml
+# (frozen): the section below replaces config.yaml's acceptance: section wholesale; every other
+# parameter (data, pricing, entry, strikes, exit, filter, sizing, cash) is still read from config.yaml.
+#
+#   .venv/bin/python scripts/run_stage1.py --run-id <id> --config config-002.yaml   (the default overlay)
+acceptance:
+  # A1 — marks respond to stress (filter OFF, variant A). Per window: at least `min_cycles` cycles
+  # ACTIVE in the window (open on any day of it) with realised P&L < 0 OR maximum adverse excursion
+  # <= -(a1_mae_credit_mult x net credit). Windows unchanged from brief 001.
+  a1_windows:
+    "Oct 2008": {start: "2008-10-01", end: "2008-10-31", min_cycles: 1}
+    "Feb 2018": {start: "2018-02-01", end: "2018-02-28", min_cycles: 1}
+    "Mar 2020": {start: "2020-03-01", end: "2020-03-31", min_cycles: 1}
+    "2022":     {start: "2022-01-01", end: "2022-12-31", min_cycles: 3}
+  a1_mae_credit_mult: 1.0
+  # A2 — unchanged.
+  sharpe_min: 0.4
+  sharpe_max: 1.2
+  # A3 — strike placement (replaces put_breach_range / call_breach_range). Median short-strike
+  # distance of executed cycles (put and call side, % of entry spot) must be within
+  # a3_median_distance_tolerance_pp percentage points of an out-of-engine replication of the strike
+  # rule on raw index data; plus touch-basis breach <= a3_touch_breach_max on each side.
+  a3_median_distance_tolerance_pp: 1.0
+  a3_touch_breach_max: 0.05
+  # A4 — 1-day lag on all inputs must not DEGRADE the governing metric by more than
+  # lag_sensitivity_max. Improvement is not a failure. Diagnostic metrics are reported under the
+  # same threshold but do not decide the verdict. Sharpe and max drawdown are no longer tested.
+  lag_sensitivity_max: 0.10
+  a4_governing_metric: net_gain_on_book
+  a4_diagnostic_metrics: [total_premium_pnl]
